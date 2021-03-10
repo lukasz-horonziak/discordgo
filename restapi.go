@@ -2190,7 +2190,7 @@ func (s *Session) WebhookExecute(webhookID, token string, wait bool, data *Webho
 func (s *Session) WebhookMessageEdit(webhookID, token, messageID string, data *WebhookEdit) (st *Message, err error) {
 	uri := EndpointWebhookMessage(webhookID, token, messageID)
 
-	response, err = s.RequestWithBucketID("PATCH", uri, data, EndpointWebhookToken("", ""))
+	response, err := s.RequestWithBucketID("PATCH", uri, data, EndpointWebhookToken("", ""))
 
 	err = unmarshal(response, &st)
 	return
