@@ -2187,11 +2187,12 @@ func (s *Session) WebhookExecute(webhookID, token string, wait bool, data *Webho
 // webhookID : The ID of a webhook
 // token     : The auth token for the webhook
 // messageID : The ID of message to edit
-func (s *Session) WebhookMessageEdit(webhookID, token, messageID string, data *WebhookEdit) (err error) {
+func (s *Session) WebhookMessageEdit(webhookID, token, messageID string, data *WebhookEdit) (st *Message, err error) {
 	uri := EndpointWebhookMessage(webhookID, token, messageID)
 
-	_, err = s.RequestWithBucketID("PATCH", uri, data, EndpointWebhookToken("", ""))
+	response, err = s.RequestWithBucketID("PATCH", uri, data, EndpointWebhookToken("", ""))
 
+	err = unmarshal(response, &st)
 	return
 }
 
