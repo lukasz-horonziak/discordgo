@@ -2490,7 +2490,7 @@ func (s *Session) InteractionRespond(interaction *Interaction, resp *Interaction
 // appID       : The application ID.
 // interaction : Interaction instance.
 // newresp     : Updated response message data.
-func (s *Session) InteractionResponseEdit(appID string, interaction *Interaction, newresp *WebhookEdit) error {
+func (s *Session) InteractionResponseEdit(appID string, interaction *Interaction, newresp *WebhookEdit) (*Message, error) {
 	return s.WebhookMessageEdit(appID, interaction.Token, "@original", newresp)
 }
 
@@ -2519,7 +2519,7 @@ func (s *Session) FollowupMessageCreate(appID string, interaction *Interaction, 
 // interaction : Interaction instance.
 // messageID   : The followup message ID.
 // data        : Data to update the message
-func (s *Session) FollowupMessageEdit(appID string, interaction *Interaction, messageID string, data *WebhookEdit) error {
+func (s *Session) FollowupMessageEdit(appID string, interaction *Interaction, messageID string, data *WebhookEdit) (*Message, error) {
 	return s.WebhookMessageEdit(appID, interaction.Token, messageID, data)
 }
 
